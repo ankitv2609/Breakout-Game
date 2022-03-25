@@ -146,9 +146,15 @@ function moveBall()
     if (
         ball.x - ball.size > paddle.x &&
         ball.x + ball.size < paddle.x + paddle.w &&
-        ball.y + ball.size > paddle.y
+        ball.y + ball.size > paddle.y 
+        /****
+         * y coordinate is measured upside down here (top is zero, downwards increase)
+         * */
     ) {
-        ball.dy = -ball.speed; // tricky shit
+        ball.dy = -ball.speed;
+         /*** ball.speed is a constant value. this just means that the verical speed of the ball after a paddle
+          *   collision will always be the same, no matter how fast it was before it
+          */
     }
 
     // brick collision
@@ -162,7 +168,10 @@ function moveBall()
                             ball.x - ball.size > brick.x &&
                             ball.x + ball.size < brick.x + brick.w &&
                             ball.y + ball.size > brick.y &&  //top brick side check
-                            ball.y - ball.size < brick.y + brick.h // bottom brick side check // tricky
+                            ball.y - ball.size < brick.y + brick.h // bottom brick side check
+                            /**
+                             * remember, y increases downwards
+                             * */
                         ) {
                             ball.dy *= -1;
                             brick.visible = false;
